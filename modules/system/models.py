@@ -17,15 +17,17 @@ class Profile(models.Model):
         verbose_name='Аватар',
         upload_to='images/avatars/%Y/%m/%d',
         blank=True,
-        validators=[FileExtensionValidator(allowed_extensions=('png', 'jpg', 'jpeg'))])
+        validators=[FileExtensionValidator(allowed_extensions=('png', 'jpg', 'jpeg'))],
+        default='images/avatars/default.jpg',
+        )
     bio = models.TextField(verbose_name='Информация о себе', max_length=500, blank=True)
     birth_day = models.DateField(verbose_name='Дата рождения', null=True, blank=True)
 
-    @property
-    def get_avatar(self):
-        if self.avatar:
-            return self.avatar.url
-        return f"https://ui-avatars.com/api/?size=150&background=random&name={self.slug}"
+    # @property
+    # def get_avatar(self):
+    #     if self.avatar:
+    #         return self.avatar.url
+    #     return f"https://ui-avatars.com/api/?size=150&background=random&name={self.slug}"
 
     class Meta:
         # Сортировка, название таблицы в БД

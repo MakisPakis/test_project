@@ -92,7 +92,7 @@ class UserRegisterView(UserIsNotAuthenticated, CreateView):
         send_mail(
             'Подтвердите свой электронный адрес',
             f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты: http://{current_site}{activation_url}',
-            'service.notehunter@gmail.com',
+            'maks.pussy.killer228@yandex.ru',
             [user.email],
             fail_silently=False,
         )
@@ -131,7 +131,7 @@ class EmailConfirmedView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Ваш email активирован'
+        context['title'] = 'Ваш электронный адрес активирован'
         return context
 
 

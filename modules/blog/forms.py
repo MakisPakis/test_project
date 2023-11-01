@@ -10,10 +10,12 @@ class ArticleCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].widget.attrs.update({
-                'class': 'form-control',
-                'autocomplete': 'off'
-            })
+            self.fields[field].widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})
+
+        self.fields['short_description'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
+        self.fields['full_description'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
+        self.fields['short_description'].required = False
+        self.fields['full_description'].required = False
 
 
 class ArticleUpdateForm(ArticleCreateForm):
@@ -23,9 +25,11 @@ class ArticleUpdateForm(ArticleCreateForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['fixed'].widget.attrs.update({
-                'class': 'form-check-input'
-        })
+        self.fields['fixed'].widget.attrs.update({'class': 'form-check-input'})
+        self.fields['short_description'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
+        self.fields['full_description'].widget.attrs.update({'class': 'form-control django_ckeditor_5'})
+        self.fields['short_description'].required = False
+        self.fields['full_description'].required = False
 
 
 class CommentCreateForm(forms.ModelForm):
@@ -33,7 +37,8 @@ class CommentCreateForm(forms.ModelForm):
     Форма добавления комментариев к статьям
     """
     parent = forms.IntegerField(widget=forms.HiddenInput, required=False)
-    content = forms.CharField(label='', widget=forms.Textarea(attrs={'cols': 30, 'rows': 5, 'placeholder': 'Комментарий', 'class': 'form-control'}))
+    content = forms.CharField(label='', widget=forms.Textarea(attrs={
+        'cols': 30, 'rows': 5, 'placeholder': 'Комментарий', 'class': 'form-control'}))
 
     class Meta:
         model = Comment

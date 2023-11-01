@@ -1,7 +1,8 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
@@ -10,8 +11,9 @@ from django.db.models import Count
 import random
 
 from .forms import ArticleCreateForm, ArticleUpdateForm, CommentCreateForm
-from .models import Article, Category, Comment
+from .models import Article, Category, Comment, Rating
 from ..services.mixins import AuthorRequiredMixin
+from ..services.utils import get_client_ip
 
 
 class ArticleListView(ListView):
@@ -90,6 +92,27 @@ def articles_list(request):
     page_object = paginator.get_page(page_number)
     context = {'page_obj': page_object}
     return render(request, 'blog/articles_func_list.html', context)
+
+
+class ArticleSearchResultView(ListView):
+    # Поиск статей на сайте
+    model = Article
+    context_object_name = 'articles'
+    paginate_by = 10
+    allow_empty = True
+    template_name = 'blog/articles_list.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('do')
+        search_vector = SearchVector('full_description', weight='B') + SearchVector('title', weight='A')
+        search_query = SearchQuery(query)
+        return (self.model.objects.annotate(rank=SearchRank(search_vector, search_query)).filter(rank__gte=0.3)
+                .order_by('-rank'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = f"Результаты поиска: {self.request.GET.get('do')}"
+        return context
 
 
 class ArticleCreateView(LoginRequiredMixin, CreateView):
@@ -176,3 +199,31 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
     def handle_no_permission(self):
         return JsonResponse({'error': 'Необходимо авторизоваться для добавления комментариев'}, status=400)
+
+
+class RatingCreateView(View):
+    model = Rating
+    # Обрабатывает POST запрос на создание и изменение модели рейтинг
+
+    def post(self, request, *args, **kwargs):
+        article_id = request.POST.get('article_id')
+        value = int(request.POST.get('value'))
+        ip_address = get_client_ip(request)
+        user = request.user if request.user.is_authenticated else None
+
+        rating, created = self.model.objects.get_or_create(
+            article_id=article_id,
+            ip_address=ip_address,
+            defaults={'value': value, 'user': user}
+        )
+
+        if not created:
+            if rating.value == value:
+                rating.delete()
+                return JsonResponse({'status': 'deleted', 'rating_sum': rating.article.get_sum_rating()})
+            else:
+                rating.value = value
+                rating.user = user
+                rating.save()
+                return JsonResponse({'status': 'updated', 'rating_sum': rating.article.get_sum_rating()})
+        return JsonResponse({'status': 'created', 'rating_sum': rating.article.get_sum_rating()})
