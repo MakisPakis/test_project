@@ -1,0 +1,1178 @@
+[
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "view_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add site",
+        "content_type": [
+            "sites",
+            "site"
+        ],
+        "codename": "add_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change site",
+        "content_type": [
+            "sites",
+            "site"
+        ],
+        "codename": "change_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete site",
+        "content_type": [
+            "sites",
+            "site"
+        ],
+        "codename": "delete_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view site",
+        "content_type": [
+            "sites",
+            "site"
+        ],
+        "codename": "view_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add Категория",
+        "content_type": [
+            "blog",
+            "category"
+        ],
+        "codename": "add_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change Категория",
+        "content_type": [
+            "blog",
+            "category"
+        ],
+        "codename": "change_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete Категория",
+        "content_type": [
+            "blog",
+            "category"
+        ],
+        "codename": "delete_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view Категория",
+        "content_type": [
+            "blog",
+            "category"
+        ],
+        "codename": "view_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add Статья",
+        "content_type": [
+            "blog",
+            "article"
+        ],
+        "codename": "add_article"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change Статья",
+        "content_type": [
+            "blog",
+            "article"
+        ],
+        "codename": "change_article"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete Статья",
+        "content_type": [
+            "blog",
+            "article"
+        ],
+        "codename": "delete_article"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view Статья",
+        "content_type": [
+            "blog",
+            "article"
+        ],
+        "codename": "view_article"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add Комментарий",
+        "content_type": [
+            "blog",
+            "comment"
+        ],
+        "codename": "add_comment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change Комментарий",
+        "content_type": [
+            "blog",
+            "comment"
+        ],
+        "codename": "change_comment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete Комментарий",
+        "content_type": [
+            "blog",
+            "comment"
+        ],
+        "codename": "delete_comment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view Комментарий",
+        "content_type": [
+            "blog",
+            "comment"
+        ],
+        "codename": "view_comment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add ('Профиль',)",
+        "content_type": [
+            "system",
+            "profile"
+        ],
+        "codename": "add_profile"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change ('Профиль',)",
+        "content_type": [
+            "system",
+            "profile"
+        ],
+        "codename": "change_profile"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete ('Профиль',)",
+        "content_type": [
+            "system",
+            "profile"
+        ],
+        "codename": "delete_profile"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view ('Профиль',)",
+        "content_type": [
+            "system",
+            "profile"
+        ],
+        "codename": "view_profile"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add Обратная связь",
+        "content_type": [
+            "system",
+            "feedback"
+        ],
+        "codename": "add_feedback"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change Обратная связь",
+        "content_type": [
+            "system",
+            "feedback"
+        ],
+        "codename": "change_feedback"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete Обратная связь",
+        "content_type": [
+            "system",
+            "feedback"
+        ],
+        "codename": "delete_feedback"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view Обратная связь",
+        "content_type": [
+            "system",
+            "feedback"
+        ],
+        "codename": "view_feedback"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add tag",
+        "content_type": [
+            "taggit",
+            "tag"
+        ],
+        "codename": "add_tag"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change tag",
+        "content_type": [
+            "taggit",
+            "tag"
+        ],
+        "codename": "change_tag"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete tag",
+        "content_type": [
+            "taggit",
+            "tag"
+        ],
+        "codename": "delete_tag"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view tag",
+        "content_type": [
+            "taggit",
+            "tag"
+        ],
+        "codename": "view_tag"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add tagged item",
+        "content_type": [
+            "taggit",
+            "taggeditem"
+        ],
+        "codename": "add_taggeditem"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change tagged item",
+        "content_type": [
+            "taggit",
+            "taggeditem"
+        ],
+        "codename": "change_taggeditem"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete tagged item",
+        "content_type": [
+            "taggit",
+            "taggeditem"
+        ],
+        "codename": "delete_taggeditem"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view tagged item",
+        "content_type": [
+            "taggit",
+            "taggeditem"
+        ],
+        "codename": "view_taggeditem"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add Рейтинг",
+        "content_type": [
+            "blog",
+            "rating"
+        ],
+        "codename": "add_rating"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change Рейтинг",
+        "content_type": [
+            "blog",
+            "rating"
+        ],
+        "codename": "change_rating"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete Рейтинг",
+        "content_type": [
+            "blog",
+            "rating"
+        ],
+        "codename": "delete_rating"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view Рейтинг",
+        "content_type": [
+            "blog",
+            "rating"
+        ],
+        "codename": "view_rating"
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$600000$zdYHDp2XNvwj199JgpYgxV$5aDr3gNJPOFImnLNlcdylsSflfAJPBYCNUddbiJtdPE=",
+        "last_login": "2023-11-13T08:00:40.755Z",
+        "is_superuser": true,
+        "username": "maks",
+        "first_name": "",
+        "last_name": "",
+        "email": "maks.pussy.killer228@yandex.ru",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-10-31T18:45:06Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$600000$vC9gQkDKBnc6ez5hTffF28$yiHqCyH7KmzB0VNLz2Xwod/S3JlTuFM3JKNfdJHFayw=",
+        "last_login": "2023-11-10T08:04:19.456Z",
+        "is_superuser": false,
+        "username": "angela_zayka_322",
+        "first_name": "",
+        "last_name": "",
+        "email": "anzhelika.nitser@yandex.ru",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-11-01T13:17:45.656Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$600000$ns5g9zaS922mJGsbPEBogK$y/YDorprFcnir7vHHoGxDC4n0wN8ajOPHqw6jPurvog=",
+        "last_login": "2023-11-11T07:43:11.195Z",
+        "is_superuser": false,
+        "username": "Serega",
+        "first_name": "",
+        "last_name": "",
+        "email": "angelikanitser@yandex.ru",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-11-11T07:42:52.487Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "7k6cfdkqp8neysukjuj1s15io6zu5ikk",
+    "fields": {
+        "session_data": ".eJxVi70OwiAQgN-F2RDuCH-O7o7O5IAjGFubSBmM8d2tSQddv5-XiDTWFkfnR7wWcRQgDr8sUb7x_SvmpYyJu-zPvvIsd9HlZcvOS-HptKd_f6PettkSBsKsjfVokKwC55LyiAoUaeJSa9bV15wChGRIQyH0DqyvlkEl8f4AsWw3gw:1r1ihJ:KrFaf67s7DR1AXbDGQQrmRl6NoB-TYioob5dwfLyBoE",
+        "expire_date": "2023-11-25T07:46:29.952Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "c2271o459noe4lsxoth8c7934upx7bty",
+    "fields": {
+        "session_data": ".eJxVjEsOwjAMBe-SNYrqxK4DS_Y9Q-XEKSmgVOpnhbg7VOoCtm9m3sv0sq2l35Y896Oai4HGnH7HKOmR6070LvU22TTVdR6j3RV70MV2k-bn9XD_Doos5Vv7yIgI5AmHgVqKDkCQ2bWNC8H7pJCZUhZ_Jo3K1LBjQQioDkMezPsDzgs25A:1qyo8f:yKfDYvAijgUtEjD62n-jDQRmZrE_dUz7Spueo-9vUfc",
+        "expire_date": "2023-11-17T06:58:41.489Z"
+    }
+},
+{
+    "model": "sites.site",
+    "fields": {
+        "domain": "127.0.0.1:8000/",
+        "name": "127.0.0.1:8000/"
+    }
+},
+{
+    "model": "system.profile",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "maks"
+        ],
+        "slug": "maks",
+        "avatar": "images/avatars/2023/11/10/KaeOUzudxLk.jpg",
+        "bio": "",
+        "birth_day": null,
+        "following": [
+            10
+        ]
+    }
+},
+{
+    "model": "system.profile",
+    "pk": 10,
+    "fields": {
+        "user": [
+            "angela_zayka_322"
+        ],
+        "slug": "angelazayka322",
+        "avatar": "images/avatars/default.jpg",
+        "bio": "",
+        "birth_day": null,
+        "following": [
+            1
+        ]
+    }
+},
+{
+    "model": "system.profile",
+    "pk": 11,
+    "fields": {
+        "user": [
+            "Serega"
+        ],
+        "slug": "serega",
+        "avatar": "images/avatars/default.jpg",
+        "bio": "",
+        "birth_day": null,
+        "following": [
+            1,
+            10
+        ]
+    }
+},
+{
+    "model": "system.feedback",
+    "pk": 1,
+    "fields": {
+        "subject": "Найм на работу",
+        "email": "google_jobs@mail.ru",
+        "content": "Go work in our company",
+        "time_create": "2023-11-07T09:31:54.280Z",
+        "ip_adress": null,
+        "user": [
+            "angela_zayka_322"
+        ]
+    }
+},
+{
+    "model": "system.feedback",
+    "pk": 2,
+    "fields": {
+        "subject": "Maks",
+        "email": "angelikanitser@yandex.ru",
+        "content": "GFsAgasfg",
+        "time_create": "2023-11-11T07:45:14.365Z",
+        "ip_adress": null,
+        "user": [
+            "Serega"
+        ]
+    }
+},
+{
+    "model": "blog.category",
+    "pk": 1,
+    "fields": {
+        "title": "Языкы програмирования",
+        "slug": "yazyky-programirovaniya",
+        "description": "Ну тут и сказать нечего\r\nхуета",
+        "parent": null,
+        "lft": 1,
+        "rght": 4,
+        "tree_id": 1,
+        "level": 0
+    }
+},
+{
+    "model": "blog.category",
+    "pk": 2,
+    "fields": {
+        "title": "PHP",
+        "slug": "php",
+        "description": "О боже, тут нечего сказать....",
+        "parent": 1,
+        "lft": 2,
+        "rght": 3,
+        "tree_id": 1,
+        "level": 1
+    }
+},
+{
+    "model": "blog.article",
+    "pk": 1,
+    "fields": {
+        "title": "PHP это не принтеры",
+        "slug": "php-eto-ne-printery",
+        "category": 2,
+        "short_description": "Это самый старый язык програмирования",
+        "full_description": "Полный отстой",
+        "thumbnail": "images/thumbnail/2023/11/01/wp.png",
+        "status": "published",
+        "time_create": "2023-10-31T18:50:19.429Z",
+        "time_update": "2023-10-31T18:50:19.429Z",
+        "author": [
+            "maks"
+        ],
+        "updater": null,
+        "fixed": false
+    }
+},
+{
+    "model": "blog.article",
+    "pk": 2,
+    "fields": {
+        "title": "Поиск тест",
+        "slug": "poisk-test",
+        "category": 2,
+        "short_description": "Давайте будем искать статьи, с поисковым движком",
+        "full_description": "Повседневная практика показывает, что курс на социально-ориентированный национальный проект способствует подготовке и реализации позиций, занимаемых участниками в отношении поставленных задач. Дорогие друзья, новая модель организационной деятельности позволяет выполнить важнейшие задания по разработке ключевых компонентов планируемого обновления! Разнообразный и богатый опыт консультация с профессионалами из IT способствует повышению актуальности соответствующих условий активизации.",
+        "thumbnail": "images/thumbnail/default.jpg",
+        "status": "published",
+        "time_create": "2023-11-01T06:32:53.641Z",
+        "time_update": "2023-11-01T06:32:53.646Z",
+        "author": [
+            "maks"
+        ],
+        "updater": null,
+        "fixed": false
+    }
+},
+{
+    "model": "blog.article",
+    "pk": 3,
+    "fields": {
+        "title": "Тест статья",
+        "slug": "test-statya",
+        "category": 2,
+        "short_description": "<p style=\"margin-left:0px;text-align:justify;\">Тестовая статья</p>",
+        "full_description": "<p style=\"margin-left:0px;text-align:justify;\">Повседневная практика показывает, что начало повседневной работы по формированию позиции создаёт предпосылки качественно новых шагов для экономической целесообразности принимаемых решений. <strong>Не следует</strong>, однако, забывать о том, что начало повседневной работы по формированию позиции играет важную роль в формировании системы масштабного изменения ряда параметров. Таким образом, сложившаяся структура организации способствует повышению актуальности дальнейших направлений развития проекта.<span style=\"color:hsl(0,75%,60%);\"> <strong><u>Повседневная практика показывает, что начало повседневной работы по формированию позиции играет важную роль в формировании новых предложений.</u></strong></span></p><ol><li style=\"text-align:justify;\"><span class=\"text-big\">С другой стороны начало повседневной работы по формированию позиции в значительной степени обуславливает создание существующих финансовых и административных условий.&nbsp;</span></li><li style=\"text-align:justify;\"><span class=\"text-big\">Разнообразный и богатый опыт социально-экономическое развитие играет важную роль в формировании дальнейших направлений развитая системы массового участия.</span></li><li style=\"text-align:justify;\"><span class=\"text-big\">Соображения высшего порядка, а также дальнейшее развитие различных форм деятельности напрямую зависит от направлений прогрессивного развития.</span></li><li style=\"text-align:justify;\"><span class=\"text-big\">Равным образом сложившаяся структура организации представляет собой интересный эксперимент проверки соответствующих условий активизации</span></li></ol>",
+        "thumbnail": "images/thumbnail/2023/11/08/1e6a90ec1f25564654b093c54a8ddd7e_XL.jpg",
+        "status": "published",
+        "time_create": "2023-11-01T08:41:45.168Z",
+        "time_update": "2023-11-08T12:35:05.106Z",
+        "author": [
+            "maks"
+        ],
+        "updater": [
+            "maks"
+        ],
+        "fixed": false
+    }
+},
+{
+    "model": "blog.article",
+    "pk": 4,
+    "fields": {
+        "title": "Ну и сайт конечно у тебя...",
+        "slug": "nu-i-sajt-konechno-u-tebya",
+        "category": 2,
+        "short_description": "<p><span class=\"text-huge\">Я в шоке, да хто этот фрон</span></p><p><span class=\"text-huge\">тендер вообще?!?!??!</span></p>",
+        "full_description": "<p>я ему кончено задам..<img class=\"image_resized\" style=\"width:15.26%;\" src=\"/media/uploads/23/11/03/%D0%B4%D1%8B%D0%BC%D0%BE%D0%BA.png\"></p>",
+        "thumbnail": "images/thumbnail/2023/11/08/Сайт_кинотеатра__копия.png",
+        "status": "published",
+        "time_create": "2023-11-03T07:01:28.377Z",
+        "time_update": "2023-11-08T12:09:13.672Z",
+        "author": [
+            "angela_zayka_322"
+        ],
+        "updater": [
+            "maks"
+        ],
+        "fixed": false
+    }
+},
+{
+    "model": "blog.comment",
+    "pk": 31,
+    "fields": {
+        "article": 4,
+        "author": [
+            "angela_zayka_322"
+        ],
+        "content": "afas",
+        "time_create": "2023-11-06T08:25:24.649Z",
+        "time_update": "2023-11-06T08:25:24.649Z",
+        "status": "published",
+        "parent": null,
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 1,
+        "level": 0
+    }
+},
+{
+    "model": "blog.comment",
+    "pk": 32,
+    "fields": {
+        "article": 4,
+        "author": [
+            "angela_zayka_322"
+        ],
+        "content": "мда",
+        "time_create": "2023-11-07T08:28:10.557Z",
+        "time_update": "2023-11-07T08:28:10.557Z",
+        "status": "published",
+        "parent": null,
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 2,
+        "level": 0
+    }
+},
+{
+    "model": "blog.comment",
+    "pk": 33,
+    "fields": {
+        "article": 4,
+        "author": [
+            "maks"
+        ],
+        "content": "А я в сети?",
+        "time_create": "2023-11-07T13:43:53.180Z",
+        "time_update": "2023-11-07T13:43:53.180Z",
+        "status": "published",
+        "parent": null,
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 3,
+        "level": 0
+    }
+},
+{
+    "model": "blog.comment",
+    "pk": 34,
+    "fields": {
+        "article": 4,
+        "author": [
+            "angela_zayka_322"
+        ],
+        "content": "ыапфпа",
+        "time_create": "2023-11-07T13:46:24.054Z",
+        "time_update": "2023-11-07T13:46:24.054Z",
+        "status": "published",
+        "parent": null,
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 4,
+        "level": 0
+    }
+},
+{
+    "model": "blog.comment",
+    "pk": 35,
+    "fields": {
+        "article": 4,
+        "author": [
+            "maks"
+        ],
+        "content": "Cупер админ",
+        "time_create": "2023-11-10T08:05:22.074Z",
+        "time_update": "2023-11-10T08:05:22.074Z",
+        "status": "published",
+        "parent": null,
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 5,
+        "level": 0
+    }
+},
+{
+    "model": "blog.comment",
+    "pk": 36,
+    "fields": {
+        "article": 4,
+        "author": [
+            "Serega"
+        ],
+        "content": "Test",
+        "time_create": "2023-11-11T07:43:48.935Z",
+        "time_update": "2023-11-11T07:43:48.935Z",
+        "status": "published",
+        "parent": null,
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 6,
+        "level": 0
+    }
+},
+{
+    "model": "blog.rating",
+    "pk": 42,
+    "fields": {
+        "article": 2,
+        "user": [
+            "angela_zayka_322"
+        ],
+        "value": 1,
+        "time_create": "2023-11-03T06:59:49.607Z",
+        "ip_address": "127.0.0.1"
+    }
+},
+{
+    "model": "blog.rating",
+    "pk": 59,
+    "fields": {
+        "article": 3,
+        "user": [
+            "angela_zayka_322"
+        ],
+        "value": 1,
+        "time_create": "2023-11-07T08:36:41.962Z",
+        "ip_address": "127.0.0.1"
+    }
+},
+{
+    "model": "blog.rating",
+    "pk": 64,
+    "fields": {
+        "article": 4,
+        "user": [
+            "maks"
+        ],
+        "value": -1,
+        "time_create": "2023-11-08T11:31:30.247Z",
+        "ip_address": "127.0.0.1"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 1,
+    "fields": {
+        "name": "PHP",
+        "slug": "php"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 2,
+    "fields": {
+        "name": "хуета",
+        "slug": "хуета"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 3,
+    "fields": {
+        "name": "Редактор",
+        "slug": "редактор"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 4,
+    "fields": {
+        "name": "красиво",
+        "slug": "красиво"
+    }
+},
+{
+    "model": "taggit.tag",
+    "pk": 5,
+    "fields": {
+        "name": "Дымок",
+        "slug": "дымок"
+    }
+},
+{
+    "model": "taggit.taggeditem",
+    "pk": 1,
+    "fields": {
+        "tag": 1,
+        "content_type": [
+            "blog",
+            "article"
+        ],
+        "object_id": 1
+    }
+},
+{
+    "model": "taggit.taggeditem",
+    "pk": 2,
+    "fields": {
+        "tag": 2,
+        "content_type": [
+            "blog",
+            "article"
+        ],
+        "object_id": 1
+    }
+},
+{
+    "model": "taggit.taggeditem",
+    "pk": 3,
+    "fields": {
+        "tag": 3,
+        "content_type": [
+            "blog",
+            "article"
+        ],
+        "object_id": 3
+    }
+},
+{
+    "model": "taggit.taggeditem",
+    "pk": 4,
+    "fields": {
+        "tag": 4,
+        "content_type": [
+            "blog",
+            "article"
+        ],
+        "object_id": 3
+    }
+},
+{
+    "model": "taggit.taggeditem",
+    "pk": 5,
+    "fields": {
+        "tag": 5,
+        "content_type": [
+            "blog",
+            "article"
+        ],
+        "object_id": 4
+    }
+}
+]

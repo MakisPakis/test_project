@@ -1,0 +1,101 @@
+:root {
+   --bg-red: #F22422;
+   --bg-red-hover: #D03000;
+   --bg-green: #24A401;
+   --bg-green-hover: green;
+   --text: #333;
+}
+
+.btn-green {
+  background-color: var(--bg-green);
+  color: #fff;
+}
+
+.btn-green:hover {
+   background-color: var(--bg-green-hover);
+   color: #fff;
+}
+
+.btn-red {
+background-color: var(--bg-red);
+  color: #fff;
+}
+
+.btn-red:hover {
+   background-color: var(--bg-red-hover);
+   color: #fff;
+}
+
+.btn__comment {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 100%;
+   
+}
+
+.rating-buttons {
+   margin: 10px 0 0 0;
+}
+
+.rating-sum {
+   pointer-events: none;
+   background: none;
+   color: var(--text);
+   min-width: 45px;
+   padding: 4px 10px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pagination__container {
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pagination a {
+  display: block;
+  color: var(--text);
+  padding: 5px 10px;
+  border: 1px solid #0d6efd;
+  border-radius: 10px;
+  margin: 5px 5px;
+}
+
+.pagination .current {
+  color: #fff;
+  padding: 5px 10px;
+  border: 1px solid #0d6efd;
+  background-color: #0d6efd;
+  border-radius: 10px;
+}
+
+.footer {
+  border-radius: 10px 10px 0 0;
+}
+
+.footer__container {
+  padding: 2rem 0;
+}
+
+.footer__creaters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.footer__creaters p {
+  margin: 0;
+  line-height: 200%;
+}
+
+.footer__creaters a {
+  color: #fff;
+}
