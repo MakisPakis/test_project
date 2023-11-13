@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from taggit.managers import TaggableManager
 from mptt.models import MPTTModel, TreeForeignKey
-from modules.services.utils import unique_slugify
+from modules.services.utils import unique_slugify, image_compress
 from django_ckeditor_5.fields import CKEditor5Field
 
 
@@ -46,13 +46,13 @@ class Article(models.Model):
         def all(self):
             # Список статей (SQL запрос с фильтрацией для страницы списка статей)
             return (self.get_queryset().select_related('author', 'category').prefetch_related('ratings')
-                .filter(status='published'))
+                    .filter(status='published'))
 
         def detail(self):
             # развернутая статья (SQL запрос с фильтрацией)
             return (self.get_queryset().select_related('author', 'category').prefetch_related(
-                'comments', 'comments__author', 'comments__author__profile', 'tags', 'ratings')
-                .filter(status='published'))
+                    'comments', 'comments__author', 'comments__author__profile', 'tags', 'ratings')
+                    .filter(status='published'))
 
     STATUS_OPTIONS = (
         ('published', 'Опубликовано'),
@@ -89,6 +89,10 @@ class Article(models.Model):
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__thumbnail = self.thumbnail if self.pk else None
+
     def __str__(self):
         return self.title
 
@@ -103,6 +107,9 @@ class Article(models.Model):
             self.slug = unique_slugify(self, self.title)
         super().save(*args, **kwargs)
 
+        if self.__thumbnail != self.thumbnail and self.thumbnail:
+            image_compress(self.thumbnail.path, width=500, height=500)
+
     def get_sum_rating(self):
         return sum([rating.value for rating in self.ratings.all()])
 
@@ -116,7 +123,7 @@ class Comment(MPTTModel):
     )
 
     article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='Статья', related_name='comments')
-    author = models.ForeignKey(User, verbose_name='Автор комментария', on_delete=models.CASCADE, related_name='comments_author')
+    author = models.ForeignKey(to=User, verbose_name='Автор комментария', on_delete=models.CASCADE, related_name='comments_author')
     content = models.TextField(verbose_name='Текст комментария', max_length=3000)
     time_create = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
     time_update = models.DateTimeField(verbose_name='Время обновления', auto_now=True)

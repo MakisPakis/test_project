@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from celery.schedules import crontab
+import django.core.cache.backends.db
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +34,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,14 +42,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'modules.blog.apps.BlogConfig',
-    'mptt',
-    'modules.services',
-    'debug_toolbar',
+    'django.contrib.sitemaps',
+    'django_ckeditor_5',
+    'django_cleanup',
     'modules.system.apps.SystemConfig',
+    'modules.blog.apps.BlogConfig',
+    'modules.services',
+    'mptt',
+    'debug_toolbar',
     'taggit',
     'captcha',
-    'django_ckeditor_5',
+
+
 ]
 
 SITE_ID = 1
@@ -62,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'modules.system.middleware.ActiveUserMiddleware',
 ]
 
 INTERNAL_IPS = [
@@ -91,7 +97,6 @@ WSGI_APPLICATION = 'base.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -106,7 +111,6 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -125,10 +129,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
-
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = 'Asia/Novosibirsk'
 
 USE_I18N = True
 
@@ -136,7 +139,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = (BASE_DIR/'static')
 STATICFILES_DIRS = [BASE_DIR/'templates/src']
@@ -145,11 +147,9 @@ MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Отправка писем через Yandex
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.yandex.ru'
@@ -161,8 +161,30 @@ EMAIL_SERVER = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = ['angelikanitser@yadnex.ru']
 
-# Настройки для ckeditor
+# Вход по логину и почте
+AUTHENTICATION_BACKENDS = [
+    'modules.system.backends.UserModelBackend'
+]
 
+# Настройки Celery
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Novosibirsk'
+
+# Резервное копирование в 00:00celery -A backend beat -l info
+CELERY_BEAT_SCHEDULE = {
+    'backup_database': {
+        'task': 'modules.services.tasks.dbackup_task',
+        'schedule': crontab(hour=0, minute=0),
+    },
+}
+
+# Настройки для ckeditor
 customColorPalette = [
     {
         'color': 'hsl(4, 90%, 58%)',
@@ -251,3 +273,10 @@ CKEDITOR_5_CONFIGS = {
 }
 
 CKEDITOR_5_FILE_STORAGE = 'modules.services.utils.CkeditorCustomStorage'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://localhost:6379/',
+    }
+}

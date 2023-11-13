@@ -39,7 +39,7 @@ async function createComment(event) {
                                 <li class="card border-0">
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <img src="${profile.get_avatar}" style="width: 120px;height: 120px;object-fit: cover;" alt="${comment.author}"/>
+                                            <img src="${comment.avatar}" style="width: 120px;height: 120px;object-fit: cover;" alt="${comment.author}"/>
                                         </div>
                                         <div class="col-md-10">
                                             <div class="card-body">

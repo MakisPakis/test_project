@@ -5,19 +5,19 @@ from django.contrib.auth.views import (LoginView, LogoutView, PasswordChangeView
                                        PasswordResetConfirmView)
 from django.contrib.auth import login, get_user_model
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.sites.models import Site
 from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes
-from django.core.mail import send_mail
-from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.utils.http import urlsafe_base64_decode
+from django.shortcuts import redirect, render
+from django.http import JsonResponse
 
 from .models import Profile, Feedback
 from .forms import (UserUpdateForm, ProfileUpdateForm, UserRegisterForm, UserLoginForm, UserPasswordChangeForm,
                     UserForgotPasswordForm, UserSetNewPasswordForm, FeedbackCreateForm)
 from ..services.mixins import UserIsNotAuthenticated
-from ..services.email import send_contact_email_message
 from ..services.utils import get_client_ip
+from ..services.tasks import send_contact_email_message_task, send_activate_email_message_task
 
 
 User = get_user_model()
@@ -28,7 +28,7 @@ class ProfileDetailView(DetailView):
     model = Profile
     context_object_name = 'profile'
     template_name = 'system/profile_detail.html'
-    queryset = model.objects.all().select_related('user')
+    queryset = model.objects.all().select_related('user').prefetch_related('followers', 'followers__user', 'following', 'following__user')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -84,18 +84,7 @@ class UserRegisterView(UserIsNotAuthenticated, CreateView):
         user = form.save(commit=False)
         user.is_active = False
         user.save()
-        # Функционал для отправки письма и генерации токена
-        token = default_token_generator.make_token(user)
-        uid = urlsafe_base64_encode(force_bytes(user.pk))
-        activation_url = reverse_lazy('confirm_email', kwargs={'uidb64': uid, 'token': token})
-        current_site = Site.objects.get_current().domain
-        send_mail(
-            'Подтвердите свой электронный адрес',
-            f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты: http://{current_site}{activation_url}',
-            'maks.pussy.killer228@yandex.ru',
-            [user.email],
-            fail_silently=False,
-        )
+        send_activate_email_message_task.delay(user.id)
         return redirect('email_confirmation_sent')
 
 
@@ -215,5 +204,58 @@ class FeedbackCreateView(SuccessMessageMixin, CreateView):
             feedback.ip_address = get_client_ip(self.request)
             if self.request.user.is_authenticated:
                 feedback.user = self.request.user
-            send_contact_email_message(feedback.subject, feedback.email, feedback.content, feedback.ip_address, feedback.user_id)
+            send_contact_email_message_task.delay(feedback.subject, feedback.email, feedback.content, feedback.ip_address, feedback.user_id)
         return super().form_valid(form)
+
+
+# Создание подписки для пользователя
+@method_decorator(login_required, name='dispatch')
+class ProfileFollowingCreateView(View):
+    model = Profile
+
+    def is_ajax(self):
+        return self.request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+    def post(self, request, slug):
+        user = self.model.objects.get(slug=slug)
+        profile = request.user.profile
+        if profile in user.followers.all():
+            user.followers.remove(profile)
+            message = f'Подписаться на {user}'
+            status = False
+        else:
+            user.followers.add(profile)
+            message = f'Отписаться от {user}'
+            status = True
+        data = {
+            'username': profile.user.username,
+            'get_absolute_url': profile.get_absolute_url(),
+            'slug': profile.slug,
+            'avatar': profile.avatar.url,
+            'message': message,
+            'status': status,
+        }
+        return JsonResponse(data, status=200)
+
+
+# Настройка ошибок
+def tr_handler404(request, exception):
+    return render(request=request, template_name='system/errors/error_page.html', status=400, context={
+        'title': "Страница не найдена: 404",
+        'error_message': 'К сожалению такая страница была не найдена, или перемещена'
+    })
+
+
+def tr_handler500(request):
+    return render(request=request, template_name='system/errors/error_page.html', status=500, context={
+        'title': 'Ошибка сервера: 500',
+        'error_message': '1: Создатель сайта не ошибается\n'
+                         '2: Если у вас появилась ошибка 500, читайте пункт 1'
+    })
+
+
+def tr_handler403(request, exception):
+    return render(request=request, template_name='system/errors/error_page.html', status=403, context={
+        'title': 'Ошибка доступа: 403',
+        'error_message': 'Доступ к этой странице ограничен'
+    })

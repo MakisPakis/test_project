@@ -1,11 +1,13 @@
 from django.urls import path
 from .views import (ProfileUpdateView, ProfileDetailView, UserRegisterView, UserLoginView, UserLogoutView,
                     UserPasswordChangeView, UserPasswordResetConfirmView, UserForgotPasswordView, UserConfirmEmailView,
-                    EmailConfirmationSentView, EmailConfirmedView, EmailConfirmationFailedView, FeedbackCreateView)
+                    EmailConfirmationSentView, EmailConfirmedView, EmailConfirmationFailedView, FeedbackCreateView,
+                    ProfileFollowingCreateView)
 
 urlpatterns = [
     path('user/edit/', ProfileUpdateView.as_view(), name='profile_edit'),
     path('user/<str:slug>/', ProfileDetailView.as_view(), name='profile_detail'),
+    path('user/follow/<str:slug>/', ProfileFollowingCreateView.as_view(), name='follow'),
     path('login/', UserLoginView.as_view(), name='login'),
     path('logout/', UserLogoutView.as_view(), name='logout'),
     path('password-change/', UserPasswordChangeView.as_view(), name='password_change'),

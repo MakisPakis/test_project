@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,6 +9,8 @@ from django.http import JsonResponse
 from taggit.models import Tag
 from django.db.models import Count
 import random
+from django.utils import timezone
+
 
 from .forms import ArticleCreateForm, ArticleUpdateForm, CommentCreateForm
 from .models import Article, Category, Comment, Rating
@@ -21,6 +23,43 @@ class ArticleListView(ListView):
     template_name = 'blog/articles_list.html'
     context_object_name = 'articles'
     paginate_by = 3
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        for article in queryset:
+            article.time_since_update = self.calculate_article_age(article.time_update)
+        return queryset
+
+    def calculate_article_age(self, time_update):
+        current_date = timezone.now()
+        age = current_date - time_update
+        age_seconds = age.total_seconds()
+        days = int(age_seconds/(60*60*24))
+        hour = int(age_seconds/(60*60))
+        minutes = int(age_seconds/(60))
+        if days > 0:
+            if days == 1:
+                return f"{days} день назад"
+            elif days == 2 or days == 3 or days == 4:
+                return f"{days} дня назад"
+            else:
+                return f"{days} дней назад"
+        elif hour > 0:
+            if hour == 1:
+                return f"{hour} час назад"
+            elif hour == 2 or hour == 3 or hour == 4:
+                return f"{hour} часа назад"
+            else:
+                return f"{hour} часов назад"
+        elif minutes > 0:
+            if minutes == 1:
+                return f"{minutes} минуту назад"
+            elif minutes == 2 or minutes == 3 or minutes == 4:
+                return f"{minutes}минуты назад"
+            else:
+                return f"{minutes} минут назад"
+        else:
+            return 'Неавно'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -42,11 +81,43 @@ class ArticleDetailView(DetailView):
         random.shuffle(similar_articles_list)
         return similar_articles_list[:6]
 
+    def calculate_article_age(self, time_update):
+        current_date = timezone.now()
+        age = current_date - time_update
+        age_seconds = age.total_seconds()
+        days = int(age_seconds/(60*60*24))
+        hour = int(age_seconds/(60*60))
+        minutes = int(age_seconds/(60))
+        if days > 0:
+            if days == 1:
+                return f"{days} день назад"
+            elif days == 2 or days == 3 or days == 4:
+                return f"{days} дня назад"
+            else:
+                return f"{days} дней назад"
+        elif hour > 0:
+            if hour == 1:
+                return f"{hour} час назад"
+            elif hour == 2 or hour == 3 or hour == 4:
+                return f"{hour} часа назад"
+            else:
+                return f"{hour} часов назад"
+        elif minutes > 0:
+            if minutes == 1:
+                return f"{minutes} минуту назад"
+            elif minutes == 2 or minutes == 3 or minutes == 4:
+                return f"{minutes}минуты назад"
+            else:
+                return f"{minutes} минут назад"
+        else:
+            return 'Неавно'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.object.title
         context['form'] = CommentCreateForm
         context['similar_articles'] = self.get_similar_articles(self.object)
+        context['time_since_update'] = self.calculate_article_age(self.object.time_update)
         return context
 
 
@@ -92,6 +163,25 @@ def articles_list(request):
     page_object = paginator.get_page(page_number)
     context = {'page_obj': page_object}
     return render(request, 'blog/articles_func_list.html', context)
+
+
+class ArticleBySignedUser(LoginRequiredMixin, ListView):
+    # Список статей авторов, на которых подписан пользователь
+    model = Article
+    template_name = 'blog/articles_list.html'
+    context_object_name = 'articles'
+    login_url = 'login'
+    paginate_by = 10
+
+    def get_queryset(self):
+        authors = self.request.user.profile.following.values_list('id', flat=True)
+        queryset = self.model.objects.all().filter(author__id__in=authors)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Статьи авторов'
+        return context
 
 
 class ArticleSearchResultView(ListView):
@@ -203,7 +293,6 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
 class RatingCreateView(View):
     model = Rating
-    # Обрабатывает POST запрос на создание и изменение модели рейтинг
 
     def post(self, request, *args, **kwargs):
         article_id = request.POST.get('article_id')
@@ -214,7 +303,7 @@ class RatingCreateView(View):
         rating, created = self.model.objects.get_or_create(
             article_id=article_id,
             ip_address=ip_address,
-            defaults={'value': value, 'user': user}
+            defaults={'value': value, 'user': user},
         )
 
         if not created:

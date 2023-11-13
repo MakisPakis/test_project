@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% autoescape off %}
+
+Здравствуйте, {{ user.get_full_name }}!
+
+Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты на нашем сайте:
+
+    {{ activation_url }}
+
+Команда сайта созданного на Django
+
+{% endautoescape %}

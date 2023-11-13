@@ -10,12 +10,14 @@
             <div class="col-md-10">
                 <div class="card-body">
                     <h6 class="card-title">
-                        <a href="{{ node.author.profile.get_absolute_url }}">{{ node.author }}</a>
+                        <a href="{{ node.author.profile.get_absolute_url }}">{{ node.author }} | {% if node.author.profile.is_online %}Онлайн{% else %}Не в сети{% endif %}</a>
                     </h6>
                     <p class="card-text">
                         {{ node.content }}
                     </p>
-                    <a class="btn btn-sm btn-dark btn-reply" href="#commentForm" data-comment-id="{{ node.pk }}" data-comment-username="{{ node.author }}">Ответить</a>
+                    <div class="btn__comment">
+                        <a class="btn btn-sm btn-dark btn-reply" href="#commentForm" data-comment-id="{{ node.pk }}" data-comment-username="{{ node.author }}">Ответить</a>
+                    </div>
                     <hr/>
                     <time>{{ node.time_create }}</time>
                 </div>

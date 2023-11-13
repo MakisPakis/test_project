@@ -5,6 +5,7 @@ from base import settings
 from urllib.parse import urljoin
 from datetime import datetime
 from django.core.files.storage import FileSystemStorage
+from PIL import Image, ImageOps
 
 
 #  Генератор уникальных SLUG для моделей, в случае существования такого SLUG.
@@ -22,8 +23,8 @@ def get_client_ip(request):
     return ip
 
 
+# Изменение места хранения файлов у Ckeditor
 class CkeditorCustomStorage(FileSystemStorage):
-    # Изменение места хранения файлов у Ckeditor
     def get_folder_name(self):
         return datetime.now().strftime('%y/%m/%d')
 
@@ -37,3 +38,15 @@ class CkeditorCustomStorage(FileSystemStorage):
 
     location = os.path.join(settings.MEDIA_ROOT, 'uploads/')
     base_url = urljoin(settings.MEDIA_URL, 'uploads/')
+
+
+# Оптимизация изображений
+def image_compress(image_path, height, width):
+    img = Image.open(image_path)
+    if img.mode != 'RGB':
+        img = img.convert('RGB')
+    if img.height > height or img.width > width:
+        output_size = (height, width)
+        img.thumbnail(output_size)
+    img = ImageOps.exif_transpose(img)
+    img.save(image_path, format='JPEG', quality=90, optimize=True)

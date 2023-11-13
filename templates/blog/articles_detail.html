@@ -4,13 +4,13 @@
 <div class="card mb-3 border-0 shadow-sm">
 	<div class="row">
 		<div class="col-4">
-			<img src="{{ article.thumbnail.url }}" class="card-img-top" alt="{{ article.title }}" />
+			<img src="{% if article.thumbnail.url != None %}{{ article.thumbnail.url }}{% else %}./media/images/thumbnail/default.jpg{% endif %}" class="card-img-top" alt="{{ article.title }}" />
 		</div>
 		<div class="col-8">
 			<div class="card-body">
 				<h5>{{ article.title }}</h5>
 				<p class="card-text">{{ article.full_description|safe }}</p>
-				Категория: <a href="{% url 'articles_by_category' article.category.slug %}">{{ article.category.title }}</a> / Добавил: {{ article.author.username }} / <small>{{ article.time_create }}</small>
+				Категория: <a href="{% url 'articles_by_category' article.category.slug %}">{{ article.category.title }}</a> / Добавил: {{ article.author.username }} / <small>{{ time_since_update }}</small>
 			</div>
 		</div>
 	</div>
@@ -20,8 +20,8 @@
 	</div>
 	{% endif %}
 	<div class="rating-buttons">
-		<button class="btn btn-sm btn-primary" data-article="{{ article.id }}" data-value="1">Лайк</button>
-		<button class="btn btn-sm btn-secondary" data-article="{{ article.id }}" data-value="-1">Дизлайк</button>
+		<button class="btn btn-sm btn-green" data-article="{{ article.id }}" data-value="1">Лайк</button>
+		<button class="btn btn-sm btn-red" data-article="{{ article.id }}" data-value="-1">Дизлайк</button>
 		<button class="btn btn-sm btn-secondary rating-sum">{{ article.get_sum_rating }}</button>
 	</div>
 </div>
