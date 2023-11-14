@@ -113,6 +113,9 @@ class Article(models.Model):
     def get_sum_rating(self):
         return sum([rating.value for rating in self.ratings.all()])
 
+    def get_view_count(self):
+        return self.views.count()
+
 
 class Comment(MPTTModel):
     # Модель древовидных комментариев
@@ -159,6 +162,21 @@ class Rating(models.Model):
         indexes = [models.Index(fields=['-time_create', 'value'])]
         verbose_name = 'Рейтинг'
         verbose_name_plural = 'Рейтинги'
+
+    def __str__(self):
+        return self.article.title
+
+
+class ViewCount(models.Model):
+    article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='views')
+    ip_address = models.GenericIPAddressField(verbose_name='IP адрес')
+    viewed_on = models.DateTimeField(auto_now_add=True, verbose_name='Дата просмотров')
+
+    class Meta:
+        ordering = ('-viewed_on',)
+        indexes = [models.Index(fields=['-viewed_on'])]
+        verbose_name = 'Просмотр'
+        verbose_name_plural = 'Просмотры'
 
     def __str__(self):
         return self.article.title

@@ -14,9 +14,9 @@
                     <p class="card-text">{{ article.short_description|safe }}</p>
                     </hr>
                     Категория: <a href="{% url 'articles_by_category' article.category.slug %}">{{ article.category.title }}</a>
-                    / Добавил: {{ article.author.username }}
+                    / Добавил: {{ article.author.username }} / Просмотры: {{ article.get_view_count }}
                     </hr>
-                    Дата создя: {{ article.time_since_update }}
+                    Добавлена: {{ article.time_since_update }}
                   </div>
                 </div>
                 <div class="rating-buttons">

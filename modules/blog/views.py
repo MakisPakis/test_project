@@ -14,6 +14,7 @@ from django.utils import timezone
 
 from .forms import ArticleCreateForm, ArticleUpdateForm, CommentCreateForm
 from .models import Article, Category, Comment, Rating
+from .mixins import ViewCountMixin
 from ..services.mixins import AuthorRequiredMixin
 from ..services.utils import get_client_ip
 
@@ -67,7 +68,7 @@ class ArticleListView(ListView):
         return context
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(ViewCountMixin, DetailView):
     model = Article
     template_name = 'blog/articles_detail.html'
     context_object_name = 'article'
@@ -85,9 +86,9 @@ class ArticleDetailView(DetailView):
         current_date = timezone.now()
         age = current_date - time_update
         age_seconds = age.total_seconds()
-        days = int(age_seconds/(60*60*24))
-        hour = int(age_seconds/(60*60))
-        minutes = int(age_seconds/(60))
+        days = int(age_seconds / (60 * 60 * 24))
+        hour = int(age_seconds / (60 * 60))
+        minutes = int(age_seconds / (60))
         if days > 0:
             if days == 1:
                 return f"{days} день назад"
@@ -110,7 +111,7 @@ class ArticleDetailView(DetailView):
             else:
                 return f"{minutes} минут назад"
         else:
-            return 'Неавно'
+            return 'Недавно'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
