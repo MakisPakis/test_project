@@ -33,4 +33,6 @@ class CommentAdminPage(DraggableMPTTAdmin):
 
 @admin.register(ViewCount)
 class ViewCountAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('article', 'viewed_on', 'ip_address')
+    list_filter = ('viewed_on',)
+    

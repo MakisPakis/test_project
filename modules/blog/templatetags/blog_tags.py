@@ -1,8 +1,10 @@
+from datetime import datetime, date, time, timedelta
+from django.utils import timezone
 from django import template
-from django.db.models import Count
+from django.db.models import Count, Q
 from taggit.models import Tag
 
-from ..models import Comment
+from ..models import Comment, Article
 
 register = template.Library()
 
@@ -18,3 +20,21 @@ def popular_tags():
 def show_latest_comments(count=5):
     comments = Comment.objects.select_related('author').filter(status='published').order_by('-time_create')[:count]
     return {'comments': comments}
+
+
+# Вывод популярных статей по просмотрам
+@register.simple_tag
+def popular_articles():
+    now_time = timezone.now()
+    # вычисляем дату начала дня (00:00) 7 дней назад
+    start_date = now_time - timedelta(days=7)
+    # вычисляем дату начала текущего дня (00:00)
+    today_start = timezone.make_aware(datetime.combine(date.today(), time.min))
+    # Получаем все статьи и количество их просмотров за последние 7 дней
+    articles = Article.objects.annotate(
+        total_view_count=Count('views', filter=Q(views__viewed_on__gte=start_date)),
+        today_view_count=Count('views', filter=Q(views__viewed_on__gte=today_start))
+    ).prefetch_related('views')
+    # Cортируем статьи по кол-ву просмотров
+    popular_articles_list = articles.order_by('-total_view_count', '-today_view_count')[:10]
+    return popular_articles_list

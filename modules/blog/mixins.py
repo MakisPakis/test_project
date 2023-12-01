@@ -2,7 +2,6 @@ from .models import ViewCount
 from modules.services.utils import get_client_ip
 
 
-
 class ViewCountMixin:
 
     def get_object(self):

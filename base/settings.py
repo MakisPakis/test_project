@@ -22,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-gjf7%b6uwkt$$c9pi!92v(bds6ci!#*otps&y6cd+umxq2g43m'
+SECRET_KEY = 'secret_key'
 # RECAPTCHA
-RECAPTCHA_PUBLIC_KEY = '6LdPA88oAAAAALgPj5KIZqoO-9zCxV-O2oXTPFz7'
-RECAPTCHA_PRIVATE_KEY = '6LdPA88oAAAAANnwZ00PUSkIlvAMrUcT4mghoclH'
+RECAPTCHA_PUBLIC_KEY = 'PUBLIC_KEY'
+RECAPTCHA_PRIVATE_KEY = 'PRIVATE_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -102,7 +102,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'App',
         'USER': 'postgres',
-        'PASSWORD': 'dBadmin1234',
+        'PASSWORD': 'DB_passwword',
         'HOST': 'localhost',
         'PORT': 5432,
     }
@@ -155,8 +155,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'maks.pussy.killer228@yandex.ru'
-EMAIL_HOST_PASSWORD = 'uinznuerrrnyazfm'
+EMAIL_HOST_USER = 'EMAIL_HOST_USER'
+EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD'
 EMAIL_SERVER = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = ['angelikanitser@yadnex.ru']

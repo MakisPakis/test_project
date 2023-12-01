@@ -45,7 +45,7 @@ class Article(models.Model):
     class ArticleManager(models.Manager):
         def all(self):
             # Список статей (SQL запрос с фильтрацией для страницы списка статей)
-            return (self.get_queryset().select_related('author', 'category').prefetch_related('ratings')
+            return (self.get_queryset().select_related('author', 'category').prefetch_related('ratings', 'views')
                     .filter(status='published'))
 
         def detail(self):

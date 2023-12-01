@@ -33,6 +33,9 @@
         <a href="{% url 'articles_by_signed_user' %}" type="button" class="btn btn-secondary me-2">Подписки</a>
         <a href="{% url 'profile_detail' request.user.profile.slug %}" type="button" class="btn btn-secondary me-2"> {{ request.user.username }}</a>
         <a href="{% url 'logout' %}" type="button" class="btn btn-red">Выйти</a>
+        {% if request.user.is_staff %}
+          <a href="{% url 'admin:index' %}" type="button" class="btn btn-secondary me-2">Админка</a>
+        {% endif %}
       {% else %}
       <div class="text-end">
         <a href="{% url 'login' %}" type="button" class="btn btn-light text-dark me-2">Войти</a>
